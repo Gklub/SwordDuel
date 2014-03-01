@@ -4,7 +4,7 @@ var setting = require("../setting");
 
 // create websokect client
 var ws = require("ws");
-ws = new ws('ws://127.0.0.1:18080');
+ws = new ws('ws://erhandsome.org:18080');
 
 
 

@@ -33,5 +33,9 @@ wss.on('connection', function(ws) {
 		if (!cb) return error(ws, "invalid dataType");
 		cb(wss, ws, pkt.message);
 	});
+
+	ws.on('close', function() {
+		console.log("closed");
+	});
 });
 
