@@ -82,7 +82,7 @@ game[setting.game.attack] = function(wss, ws, msg) {
 			ss.push(wss.clients[i]);
 
 	if (ss.length == 2) {
-		var dh = 100*Math.log(Math.abs(ss[0].a - ss[1].a));	// delta health
+		var dh = 100*Math.log(Math.abs(ss[0].a - ss[1].a)+1);	// delta health
 		var defeat = Number(ss[0].a > ss[1].a);
 		var die = (ss[defeat].health -= dh) <= 0;
 		ss[0].a = ss[1].a = undefined;
