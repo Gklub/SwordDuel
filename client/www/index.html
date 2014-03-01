@@ -10,114 +10,17 @@
   </head>
   <body>
     <h1 id="status" class="blink">连接至服务器中</h1>
+    <input type="text" id="server_addr" />
+    <button id="btnConnect">Connect</button>
 
     <button id="btnReady" disabled style="display: none"><h2>Ready</h2></button>
 
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/zepto.js"></script>
+    <script type="text/javascript" src="js/fastclick.js"></script>
     <script type="text/javascript" src="js/eventemitter.js"></script>
     <script type="text/javascript" src="js/settings.js"></script>
     <script type="text/javascript" src="js/dispathcer.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
-    <script type="text/javascript">
-//	    <!--for debug-->
-
-Socket = new WebSocket('ws://' + settings.SERVER_ADDR + ':18080');
-
-Socket.onopen = function () {
-	Socket.send(JSON.stringify({
-		packetType: settings.PACKET_TYPE.PACKET_SYSTEM,
-		dataType: settings.DATA_TYPE.CLIENT_AUTH,
-		message: {
-			role: settings.ROLE.PLAYER
-		}
-	}));
-
-	$('#status').html('已连接至服务器，等待对手加入');
-};
-
-Socket.onmessage = function (event) {
-	Dispatcher.dispatch(JSON.parse(event.data));
-};
-
-Socket.onerror = function () {
-	console.log('socket error');
-};
-
-Socket.onclose = function () {
-	$('#status').html('连接已断开');
-	console.log('socket closed');
-};
-
-EventEmitter.waitFor(['server ready'], function () {
-	$('#btnReady').attr('disabled', null);
-	$('#status').html('对手已加入，请准备');
-});
-
-EventEmitter.waitFor(['game start'], function () {
-	$('#status').html('决斗开始');
-	$('#btnReady').hide();
-});
-
-EventEmitter.waitFor(['round start'], function () {
-	$('#status').html('请快速挥动手机，力量越大，伤害越大');
-
-	var accelerations = [];
-	var count = 0;
-	var x = 0;
-
-	// collect x every 0.03 seconds for 10 times
-	var watchId = navigator.accelerometer.watchAcceleration(function (acceleration) {
-		accelerations.push(acceleration.x);
-		if (acceleration.x > 10) {
-			count++;
-		}
-
-		if (count === 20 && watchId) {
-			navigator.accelerometer.clearWatch(watchId);
-			watchId = null;
-
-			navigator.notification.vibrate(500);
-
-			// count max x
-			accelerations.forEach(function (acceleration) {
-				if (acceleration > x) {
-					x = acceleration;
-				}
-			});
-
-			// send the max x to the server
-			Socket.send(JSON.stringify({
-				packetType: settings.PACKET_TYPE.PACKET_GAME,
-				dataType: settings.DATA_TYPE.ATTACK,
-				message: {
-					a: x
-				}
-			}));
-		}
-	}, function () {
-		alert('error');
-	}, { frequency: 30 });
-});
-
-EventEmitter.waitFor(['result'], function () {
-	$('#status').html('已结算，等待下一回合');
-});
-
-EventEmitter.waitFor(['game over'], function () {
-	$('#status').html('游戏结束');
-	$('#btnReady').show();
-});
-
-$('#btnReady').on('click', function () {
-	// tell the server that the player is ready for battle
-	Socket.send(JSON.stringify({
-		packetType: settings.PACKET_TYPE.PACKET_SYSTEM,
-		dataType: settings.DATA_TYPE.CLIENT_READY
-	}));
-
-	$('#status').html('已准备，等待对手');
-});
-    </script>
   </body>
 </html>

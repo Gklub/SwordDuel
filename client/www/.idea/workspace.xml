@@ -5,13 +5,13 @@
     <ignored path="www.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/config.xml" changelist="9b4bede7-a401-475e-8e56-6ffae3dcd9ba" time="1393654406160" ignored="false" />
-    <file path="/index.html" changelist="9b4bede7-a401-475e-8e56-6ffae3dcd9ba" time="1393664049162" ignored="false" />
+    <file path="/index.html" changelist="9b4bede7-a401-475e-8e56-6ffae3dcd9ba" time="1393666481199" ignored="false" />
     <file path="/connection.js" changelist="9b4bede7-a401-475e-8e56-6ffae3dcd9ba" time="1393663537105" ignored="false" />
     <file path="/settings.js" changelist="9b4bede7-a401-475e-8e56-6ffae3dcd9ba" time="1393646465764" ignored="false" />
-    <file path="/main.js" changelist="9b4bede7-a401-475e-8e56-6ffae3dcd9ba" time="1393664135865" ignored="false" />
+    <file path="/main.js" changelist="9b4bede7-a401-475e-8e56-6ffae3dcd9ba" time="1393666716432" ignored="false" />
     <file path="/dispathcer.js" changelist="9b4bede7-a401-475e-8e56-6ffae3dcd9ba" time="1393665249430" ignored="false" />
     <file path="/eventemitter.js" changelist="9b4bede7-a401-475e-8e56-6ffae3dcd9ba" time="1393645150300" ignored="false" />
-    <file path="/index.css" changelist="9b4bede7-a401-475e-8e56-6ffae3dcd9ba" time="1393664797267" ignored="false" />
+    <file path="/index.css" changelist="9b4bede7-a401-475e-8e56-6ffae3dcd9ba" time="1393666498491" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,27 +34,36 @@
       <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="66" selection-start="1017" selection-end="1017" vertical-scroll-proportion="-12.714286">
+            <state line="13" column="0" selection-start="650" selection-end="650" vertical-scroll-proportion="-8.821428">
               <folding>
-                <element signature="n#style#0;n#button#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#button#1;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/main.js">
+      <file leaf-file-name="index.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/css/index.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="0" selection-start="724" selection-end="724" vertical-scroll-proportion="0.0">
+            <state line="92" column="16" selection-start="2590" selection-end="2590" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dispathcer.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="main.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/js/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="46" column="33" selection-start="1140" selection-end="1140" vertical-scroll-proportion="1.3571428">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dispathcer.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/dispathcer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="72" column="25" selection-start="1531" selection-end="1531" vertical-scroll-proportion="0.7049689">
+            <state line="29" column="45" selection-start="627" selection-end="627" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -88,10 +97,10 @@
         <option value="$PROJECT_DIR$/js/zepto.js" />
         <option value="$PROJECT_DIR$/config.xml" />
         <option value="$PROJECT_DIR$/js/connection.js" />
-        <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/js/main.js" />
-        <option value="$PROJECT_DIR$/css/index.css" />
         <option value="$PROJECT_DIR$/js/dispathcer.js" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/css/index.css" />
+        <option value="$PROJECT_DIR$/js/main.js" />
       </list>
     </option>
   </component>
@@ -288,7 +297,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="16" column="112" selection-start="864" selection-end="864" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="n#style#0;n#button#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#1;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -303,13 +312,6 @@
     <entry file="file://$PROJECT_DIR$/js/dispathcer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="54" column="40" selection-start="1107" selection-end="1107" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/connection.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="34" selection-start="397" selection-end="397" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -330,43 +332,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/eventemitter.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="25" selection-start="2026" selection-end="2026" vertical-scroll-proportion="2.1077654">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/connection.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="0" selection-start="81" selection-end="81" vertical-scroll-proportion="0.17701863">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="66" selection-start="1017" selection-end="1017" vertical-scroll-proportion="-12.714286">
-          <folding>
-            <element signature="n#style#0;n#button#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="0" selection-start="724" selection-end="724" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/index.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="17" selection-start="1807" selection-end="1807" vertical-scroll-proportion="0.24722663">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/settings.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="19" selection-start="184" selection-end="184" vertical-scroll-proportion="0.0">
@@ -378,7 +343,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/dispathcer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="25" selection-start="1531" selection-end="1531" vertical-scroll-proportion="0.7049689">
+        <state line="29" column="45" selection-start="627" selection-end="627" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/index.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="92" column="16" selection-start="2590" selection-end="2590" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="0" selection-start="650" selection-end="650" vertical-scroll-proportion="-8.821428">
+          <folding>
+            <element signature="n#style#0;n#button#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="33" selection-start="1140" selection-end="1140" vertical-scroll-proportion="1.3571428">
           <folding />
         </state>
       </provider>
