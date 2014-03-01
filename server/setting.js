@@ -29,6 +29,6 @@ module.exports = {
 
 
 	// server
-	health: 1000,		// initial health
+	health: 1500,		// initial health
 };
 
