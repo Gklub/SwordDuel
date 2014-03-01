@@ -2,3 +2,5 @@
 client/platforms
 client/merges
 *~
+panel/uikit*
+.idea
