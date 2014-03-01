@@ -33,13 +33,16 @@ ws.on('message', function(msg) {
 		console.log(">>>>>>>> ", healths, " <<<<<<<<");
 	}
 	if (	pkt.packetType == setting.packet.game &&
-			pkt.  dataType == setting.game.reault) {
+			pkt.  dataType == setting.game.result) {
+		var player = pkt.message.player;
+		var health = pkt.message.health;
+		healths[player] = health;
+
+		console.log(">>>>>>>> ", healths, " <<<<<<<<");
+
 		ws.send(JSON.stringify({
 			packetType: setting.packet.game,
-			  dataType: setting.game.attack,
-			message: {
-				a: Math.random()*50,
-			},
+			  dataType: setting.game.displayed,
 		}));
 	}
 });
