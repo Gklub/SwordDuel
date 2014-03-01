@@ -4,7 +4,7 @@ var setting = require("../setting");
 
 // create websokect client
 var ws = require("ws");
-ws = new ws('ws://erhandsome.org:18080');
+ws = new ws('ws://127.0.0.1:18080');
 
 
 
@@ -16,6 +16,7 @@ ws.on('open', function() {
 		  dataType: setting.system.client_auth,
 		message: {
 			role: setting.system.role.player,
+			name: "" + parseInt(Math.random()*100),
 		}
 	}));
 });
@@ -38,7 +39,7 @@ ws.on('message', function(msg) {
 			packetType: setting.packet.game,
 			  dataType: setting.game.attack,
 			message: {
-				a: Math.random(),
+				a: Math.random()*50,
 			},
 		}));
 	}
