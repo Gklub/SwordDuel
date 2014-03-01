@@ -52,56 +52,64 @@ Dispatcher = {
 				$('#status').html('请快速挥动手机，力量越大，伤害越大');
 
 				var accelerations = [];
-				var count = 0;
 				var x = 0;
 			  var start = false;
+			  var last = 0;
+			  var current = 0;
+			  var sent = false;
 
-				// collect x every 0.03 seconds for 10 times
-				var watchId = navigator.accelerometer.watchAcceleration(function (acceleration) {
-					if (acceleration.x > 3) {
-						start = true;
-					}
+				//	collect x every 0.03 seconds
+			  if (!sent) {
+				  var watchId = navigator.accelerometer.watchAcceleration(function (acceleration) {
+					  acceleration.x = Math.abs(acceleration.x);
 
-					if (!start) {
-						return;
-					}
+					  last = current;
+					  current = acceleration.x;
 
-					count++;
-					accelerations.push(acceleration.x);
+					  // 10 is gravity, uh.. a little greater than gravity
+					  if (Math.abs(current - last) > 10) {
+						  start = true;
+					  }
 
-					if (count === 10 && watchId) {
-						start = false;
-						navigator.accelerometer.clearWatch(watchId);
-						watchId = null;
+					  if (!start) {
+						  return;
+					  }
 
-						navigator.notification.vibrate(500);
+					  accelerations.push(acceleration.x);
 
-						// count max x
-						accelerations.forEach(function (acceleration) {
-							if (acceleration > x) {
-								x = acceleration;
-							}
-						});
+					  if (Math.abs(current - last) <= 2 && watchId) {
+						  start = false;
+						  navigator.accelerometer.clearWatch(watchId);
+						  watchId = null;
 
-						$('#status').html('等待结果');
+						  navigator.notification.vibrate(500);
 
-						// send the max x to the server
-						Socket.send(JSON.stringify({
-							packetType: settings.PACKET_TYPE.PACKET_GAME,
-							dataType: settings.DATA_TYPE.ATTACK,
-							message: {
-								a: x
-							}
-						}));
-					}
-				}, function () {
-					alert('error');
-				}, { frequency: 30 });
+						  // count max x
+						  accelerations.forEach(function (acceleration) {
+							  if (acceleration > x) {
+								  x = acceleration;
+							  }
+						  });
+
+						  $('#status').html('等待结果');
+
+						  // send the max x to the server
+						  Socket.send(JSON.stringify({
+							  packetType: settings.PACKET_TYPE.PACKET_GAME,
+							  dataType: settings.DATA_TYPE.ATTACK,
+							  message: {
+								  a: x
+							  }
+						  }));
+
+						  sent = true;
+					  }
+				  }, function () {
+					  alert('error');
+				  }, { frequency: 30 });
+			  }
+
 				break;
-
-//			case settings.DATA_TYPE.RESULT :
-//				$('#status').html('已结算，等待下一回合');
-//				break;
 
 			case settings.DATA_TYPE.GAME_OVER :
 				$('#status').html('游戏结束');

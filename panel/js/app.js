@@ -42,12 +42,24 @@ Socket.onmessage = function (event) {
 		  Player.set2Name(names[1]);
 
 			break;
+		case settings.DATA_TYPE.ATTACK :
+		  var isPlayer1 = !packet.message.player;
+		  var damage = packet.message.damage;
+
+		  Director.displayDamage(isPlayer1, damage);
+
+		  if (isPlayer1) {
+			  Audio.play1P();
+		  } else {
+			  Audio.play2P();
+		  }
+			break;
 
 		case settings.DATA_TYPE.RESULT :
+		  Audio.playKnock();
 		  console.log('one result');
-			var isPlayer1 = packet.message.player;
+			var isPlayer1 = !packet.message.player;
 			var hp = packet.message.health;
-		  var damages = packet.message.damages;
 
 			if (isPlayer1) {
 				Player.set1HP(hp);
@@ -55,7 +67,7 @@ Socket.onmessage = function (event) {
 				Player.set2HP(hp);
 			}
 
-		  Director.displayDamages(damages);
+		  Director.shake(isPlayer1);
 
 		  setTimeout(function () {
 				Socket.send(JSON.stringify({

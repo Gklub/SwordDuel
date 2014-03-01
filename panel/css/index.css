@@ -1,20 +1,52 @@
+body {
+    text-align: center;
+}
+
 .uk-progress-bar {
     border-radius: 30px;
 }
 
 .uk-progress {
-    height: 50px;
+    margin-top: 80px;
+    height: 40px;
     border-radius: 30px;
 }
 
-#VS {
-    text-align: center;
+#1PName {
+    float: right;
+    font-family: 'Mrs Sheppards', cursive;
+}
+
+#2PName {
+    float: left;
+    font-family: 'Mrs Sheppards', cursive;
 }
 
 .uk-container {
-    margin-top: 200px;
+    margin-top: 30px;
 }
 
 span {
     margin: 17px;
 }
+
+.name {
+    margin-top: 60px;
+}
+
+#damages {
+    margin-top: 20px;
+}
+
+.damage {
+    margin: 10px;
+    font-size: 6em;
+    font-family: 'Mrs Sheppards', cursive;
+}
+
+canvas {
+    position: absolute;
+    width: 800px;
+    height: 600px;
+}
+

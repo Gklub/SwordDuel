@@ -11,6 +11,7 @@ window.addEventListener('load', function () {
 
 document.addEventListener('deviceready', function () {
 	$('#server_addr').val(settings.SERVER_ADDR);
+	$('#name').val(localStorage.getItem('name'));
 
 	$('#btnReady').on('click', function () {
 		// tell the server that the player is ready for battle
@@ -23,10 +24,15 @@ document.addEventListener('deviceready', function () {
 	});
 
 	$('#btnConnect').on('click', function () {
+		var serverIP = $('#server_addr').val() || settings.SERVER_ADDR;
+		var name = $('#name').val();
+
+		localStorage.setItem('IP', serverIP);
+		localStorage.setItem('name', name);
 		$('#status').html('连接至服务器中');
 		$('#btnConnect').hide();
+		$('input').attr('disabled', 'disabled');
 
-		var serverIP = $('#server_addr').val() || settings.SERVER_ADDR;
 		Socket = new WebSocket('ws://' + serverIP + ':18080');
 
 		Socket.onopen = function () {
@@ -35,7 +41,7 @@ document.addEventListener('deviceready', function () {
 				dataType: settings.DATA_TYPE.CLIENT_AUTH,
 				message: {
 					role: settings.ROLE.PLAYER,
-					name: $('#name').val()
+					name: name
 				}
 			}));
 

@@ -29,5 +29,5 @@ settings = {
 		PANEL: 1
 	},
 
-	SERVER_ADDR: 'erhandsome.org'
+	SERVER_ADDR: localStorage.getItem('IP')
 };
