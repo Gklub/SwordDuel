@@ -57,6 +57,9 @@ system[setting.system.client_ready] = function(wss, ws) {
 			s.send(JSON.stringify({
 				packetType: setting.packet.game,
 				  dataType: setting.game.start,
+				message: {
+					health: setting.health,
+				},
 			}));
 			if (s.role == setting.system.role.player) {
 				s.send(JSON.stringify({

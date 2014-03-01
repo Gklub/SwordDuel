@@ -28,7 +28,7 @@ ws.on('message', function(msg) {
 
 	if (	pkt.packetType == setting.packet.game &&
 			pkt.  dataType == setting.game.start) {
-		healths = [ setting.health, setting.health ];
+		healths = [ pkt.message.health, pkt.message.health ];
 		console.log("new game:");
 		console.log(">>>>>>>> \033[1;35m", healths, "\033[0m <<<<<<<<");
 	}
