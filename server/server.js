@@ -2,6 +2,7 @@
 
 var setting = require("./setting");
 var process = require("./process");
+var error   = require("./error"  );
 
 // create websokect server
 var wss = require("ws").Server;
@@ -19,27 +20,18 @@ wss.on('connection', function(ws) {
 		}
 		catch (e) {
 			console.log(e);
-			ws.send(JSON.stringify({
-				packetType: setting.packet.system,
-				dataType: setting.system.invalid
-			}));
-			ws.close();
-			return;
+			return error(ws, "json string expected");
 		}
 
+		// XXX DEBUG
 		console.log(pkt);
 
-		switch (pkt.packetType) {
-			case setting.packet.system: process.system(wss, ws, pkt); break;
-			case setting.packet.game  : process.  game(wss, ws, pkt); break;
-			default:
-				ws.send(JSON.stringify({
-					packetType: setting.packet.system,
-					dataType: setting.system.invalid
-				}));
-				ws.close();
-				return;
-		}
+		// dispatch packet
+		var proc = process[pkt.packetType];
+		if (!proc) return error(ws, "invalid packetType");
+		proc = proc[pkt.dataType];
+		if (!proc) return error(ws, "invalid dataType");
+		proc(wss, ws, pkt.message);
 	});
 });
 
