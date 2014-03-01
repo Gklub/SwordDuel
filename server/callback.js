@@ -17,7 +17,13 @@ var game   = callback[setting.packet.game  ];
 system[setting.system.client_auth] = function(wss, ws, msg) {
 	if (!msg) return error(ws, "message expected");
 
+	if (msg.role === undefined) return error(ws, "role expected");
 	ws.role = msg.role;
+
+	if (msg.role == setting.system.role.player) {
+		if (msg.name === undefined) return error(ws, "name expected");
+		ws.name = msg.name;
+	}
 
 	var nplayer = 0;
 	var npanel  = 0;
@@ -43,48 +49,91 @@ system[setting.system.client_auth] = function(wss, ws, msg) {
 system[setting.system.client_ready] = function(wss, ws) {
 	ws.ready = true;
 
-	var nready = 0;
+	var names = [];
 	for (var i in wss.clients) {
 		var s = wss.clients[i];
-		nready += (s.role == setting.system.role.player && s.ready);
+		if (s.role == setting.system.role.player)
+			names.push(s.name);
 	}
 
 	// notify panel : game start
 	// notify player: game start, new round
-	if (nready == 2)
+	if (names.length == 2) {
+		var start_pkt = JSON.stringify({
+			packetType: setting.packet.game,
+			  dataType: setting.game.start,
+			message: {
+				health: setting.health,
+				names : names,
+			},
+		});
+
+		var round_pkt = JSON.stringify({
+			packetType: setting.packet.game,
+			  dataType: setting.game.round,
+		});
+
 		for (var i in wss.clients) {
 			var s = wss.clients[i];
-			s.send(JSON.stringify({
-				packetType: setting.packet.game,
-				  dataType: setting.game.start,
-				message: {
-					health: setting.health,
-				},
-			}));
-			if (s.role == setting.system.role.player) {
-				s.send(JSON.stringify({
-					packetType: setting.packet.game,
-					  dataType: setting.game.round,
-				}));
-			}
+			s.send(start_pkt);
+			if (s.role == setting.system.role.player)
+				s.send(round_pkt);
 		}
+	}
 }
 
 game[setting.game.attack] = function(wss, ws, msg) {
 	if (!msg) return error(ws, "message expected");
-	if (!msg.a) return error(ws, "acceleration (a) expected");
+	if (msg.a === undefined) return error(ws, "acceleration (a) expected");
 
 	ws.a = msg.a;
 
 	var ss = [];	// sockets of those who have acceleration values
-	for (var i in wss.clients)
-		if (wss.clients[i].a)
-			ss.push(wss.clients[i]);
+	var players = [];
+	for (var i in wss.clients) {
+		var s = wss.clients[i];
+		if (s.a)
+			ss.push(s);
+		if (s.role == setting.system.role.player)
+			players.push(s);
+	}
+	var playerid = Number(players[1] == ws);
+
+	for (var i in wss.clients) {
+		var s = wss.clients[i];
+		if (s.role == setting.system.role.panel)
+			s.send(JSON.stringify({
+				packetType: setting.packet.game,
+				  dataType: setting.game.attack,
+				message: {
+					player: playerid,
+					damage: ws.a,
+				}
+			}));
+	}
 
 	if (ss.length == 2) {
-		var dh = 100*Math.log(Math.abs(ss[0].a - ss[1].a)+1);	// delta health
+		var dh = 150*Math.log(Math.abs(ss[0].a-ss[1].a) + 1);	// delta health
 		var defeat = Number(ss[0].a > ss[1].a);
 		var die = (ss[defeat].health -= dh) <= 0;
+
+		var over_pkt = JSON.stringify({
+			packetType: setting.packet.game,
+			  dataType: setting.game.over,
+			message: {
+				player: defeat,
+			}
+		});
+
+		var result_pkt = JSON.stringify({
+			packetType: setting.packet.game,
+			  dataType: setting.game.result,
+			message: {
+				player: defeat,
+				health: ss[defeat].health,
+			}
+		});
+
 		ss[0].a = ss[1].a = undefined;
 
 		// notify panel: update the loser's health, or game over if die
@@ -92,23 +141,10 @@ game[setting.game.attack] = function(wss, ws, msg) {
 			var s = wss.clients[i];
 			if (die) {
 				s.ready = undefined;
-				s.send(JSON.stringify({
-					packetType: setting.packet.game,
-					  dataType: setting.game.over,
-					message: {
-						player: defeat,
-					}
-				}));
+				s.send(over_pkt);
 			}
 			else if (s.role == setting.system.role.panel)
-				s.send(JSON.stringify({
-					packetType: setting.packet.game,
-					  dataType: setting.game.result,
-					message: {
-						player: defeat,
-						health: ss[defeat].health,
-					}
-				}));
+				s.send(result_pkt);
 		}
 	}
 }
