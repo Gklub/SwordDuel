@@ -37,18 +37,25 @@ Socket.onmessage = function (event) {
 			Player.set1HP(packet.message.health);
 			Player.set2HP(packet.message.health);
 
+		  var names = packet.message.names;
+		  Player.set1Name(names[0]);
+		  Player.set2Name(names[1]);
+
 			break;
 
 		case settings.DATA_TYPE.RESULT :
 		  console.log('one result');
 			var isPlayer1 = packet.message.player;
 			var hp = packet.message.health;
+		  var damages = packet.message.damages;
 
 			if (isPlayer1) {
 				Player.set1HP(hp);
 			} else {
 				Player.set2HP(hp);
 			}
+
+		  Director.displayDamages(damages);
 
 		  setTimeout(function () {
 				Socket.send(JSON.stringify({

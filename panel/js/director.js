@@ -6,6 +6,9 @@
  */
 
 var Director = {
+	waitingModal: new $.UIkit.modal.Modal("#waitingModal"),
+	resultModal: new $.UIkit.modal.Modal("#resultModal"),
+
 	over: function (isPlayer1Win) {
 		if (isPlayer1Win) {
 			this.toggleResult('1p');
@@ -13,9 +16,6 @@ var Director = {
 			this.toggleResult('2p');
 		}
 	},
-
-	waitingModal: new $.UIkit.modal.Modal("#waitingModal"),
-	resultModal: new $.UIkit.modal.Modal("#resultModal"),
 
 	toggleWaiting: function () {
 		if ( this.waitingModal.isActive() ) {
@@ -32,5 +32,10 @@ var Director = {
 		} else {
 			this.resultModal.show();
 		}
+	},
+
+	displayDamages: function (damages) {
+		$('#1PDamage').html(damages[0]);
+		$('#2PDamage').html(damages[1]);
 	}
 };

@@ -23,6 +23,7 @@ document.addEventListener('deviceready', function () {
 	});
 
 	$('#btnConnect').on('click', function () {
+		$('#status').html('连接至服务器中');
 		$('#btnConnect').hide();
 
 		var serverIP = $('#server_addr').val() || settings.SERVER_ADDR;
@@ -33,7 +34,8 @@ document.addEventListener('deviceready', function () {
 				packetType: settings.PACKET_TYPE.PACKET_SYSTEM,
 				dataType: settings.DATA_TYPE.CLIENT_AUTH,
 				message: {
-					role: settings.ROLE.PLAYER
+					role: settings.ROLE.PLAYER,
+					name: $('#name').val()
 				}
 			}));
 
