@@ -21,6 +21,7 @@ ws.on('open', function() {
 });
 
 var healths;
+var names;
 
 ws.on('message', function(msg) {
 	var pkt = JSON.parse(msg);
@@ -29,8 +30,8 @@ ws.on('message', function(msg) {
 	var print_health = function(damages) {
 		if (damages === undefined) damages = [ 0, 0 ];
 		var s = ">>> \033[1;31m" + damages[0].toFixed(2) + "\033[0m >>> " +
-				"1 HP \033[1;35m" + parseInt(healths[0]) + "\033[0m  --  " +
-				"\033[1;35m" + parseInt(healths[1]) + "\033[0m HP 2 <<< " +
+				names[0] + " HP \033[1;35m" + parseInt(healths[0]) + "\033[0m  --  " +
+				"\033[1;35m" + parseInt(healths[1]) + "\033[0m HP " + names[1] + " <<< " +
 				"\033[1;31m" + damages[1].toFixed(2) + "\033[0m <<<";
 		console.log(s);
 	}
@@ -38,6 +39,7 @@ ws.on('message', function(msg) {
 	if (	pkt.packetType == setting.packet.game &&
 			pkt.  dataType == setting.game.start) {
 		healths = [ pkt.message.health, pkt.message.health ];
+		names = pkt.message.names;
 		console.log("new game:");
 		print_health();
 	}
