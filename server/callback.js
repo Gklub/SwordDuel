@@ -89,12 +89,31 @@ game[setting.game.attack] = function(wss, ws, msg) {
 	ws.a = msg.a;
 
 	var ss = [];	// sockets of those who have acceleration values
-	for (var i in wss.clients)
-		if (wss.clients[i].a)
-			ss.push(wss.clients[i]);
+	var players = [];
+	for (var i in wss.clients) {
+		var s = wss.clients[i];
+		if (s.a)
+			ss.push(s);
+		if (s.role == setting.system.role.player)
+			players.push(s);
+	}
+	var playerid = Number(players[1] == ws);
+
+	for (var i in wss.clients) {
+		var s = wss.clients[i];
+		if (s.role == setting.system.role.panel)
+			s.send(JSON.stringify({
+				packetType: setting.packet.game,
+				  dataType: setting.game.attack,
+				message: {
+					player: playerid,
+					damage: ws.a,
+				}
+			}));
+	}
 
 	if (ss.length == 2) {
-		var dh = 200*Math.log(Math.abs(ss[0].a-ss[1].a) + 1);	// delta health
+		var dh = 150*Math.log(Math.abs(ss[0].a-ss[1].a) + 1);	// delta health
 		var defeat = Number(ss[0].a > ss[1].a);
 		var die = (ss[defeat].health -= dh) <= 0;
 
@@ -112,7 +131,6 @@ game[setting.game.attack] = function(wss, ws, msg) {
 			message: {
 				player: defeat,
 				health: ss[defeat].health,
-				damages: [ ss[0].a, ss[1].a ],
 			}
 		});
 
