@@ -1,6 +1,6 @@
 // vim: ts=4 sw=4 sts=0 noet
 
-var setting = require("./setting");
+var setting = require("../setting");
 
 // create websokect client
 var ws = require("ws");
@@ -15,7 +15,7 @@ ws.on('open', function() {
 		packetType: setting.packet.system,
 		  dataType: setting.system.client_auth,
 		message: {
-			role: setting.system.role.player
+			role: setting.system.role.panel,
 		}
 	}));
 });
@@ -23,13 +23,5 @@ ws.on('open', function() {
 ws.on('message', function(msg) {
 	var pkt = JSON.parse(msg);
 	console.log("received:", pkt);
-
-	if (	pkt.packetType == setting.packet.system &&
-			pkt.  dataType == setting.system.server_ready) {
-		ws.send(JSON.stringify({
-			packetType: setting.packet.system,
-			  dataType: setting.system.client_ready,
-		}));
-	}
 });
 

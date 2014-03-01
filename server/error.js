@@ -7,7 +7,7 @@ module.exports = function(ws, desc) {
 		packetType: setting.packet.system,
 		  dataType: setting.system.invalid,
 		message: {
-			description: desc
+			description: desc,
 		}
 	}));
 	ws.close();

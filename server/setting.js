@@ -1,9 +1,10 @@
 // vim: ts=4 sw=4 sts=0 noet
 
 module.exports = {
+	// transformation
 	packet: {
 		system: 0,
-		game: 1
+		game: 1,
 	},
 
 	system: {
@@ -13,8 +14,8 @@ module.exports = {
 		invalid: 3,
 		role: {
 			player: 0,
-			panel : 1
-		}
+			panel : 1,
+		},
 	},
 
 	game: {
@@ -22,7 +23,11 @@ module.exports = {
 		round: 1,
 		attack: 2,
 		result: 3,
-		over: 4
-	}
+		over: 4,
+	},
+
+
+	// server
+	health: 1000,		// initial health
 };
 

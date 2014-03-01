@@ -1,8 +1,8 @@
 // vim: ts=4 sw=4 sts=0 noet
 
-var setting = require("./setting");
-var process = require("./process");
-var error   = require("./error"  );
+var setting  = require("./setting" );
+var callback = require("./callback");
+var error    = require("./error"   );
 
 // create websokect server
 var wss = require("ws").Server;
@@ -27,11 +27,11 @@ wss.on('connection', function(ws) {
 		console.log(pkt);
 
 		// dispatch packet
-		var proc = process[pkt.packetType];
-		if (!proc) return error(ws, "invalid packetType");
-		proc = proc[pkt.dataType];
-		if (!proc) return error(ws, "invalid dataType");
-		proc(wss, ws, pkt.message);
+		var cb = callback[pkt.packetType];
+		if (!cb) return error(ws, "invalid packetType");
+		cb = cb[pkt.dataType];
+		if (!cb) return error(ws, "invalid dataType");
+		cb(wss, ws, pkt.message);
 	});
 });
 
