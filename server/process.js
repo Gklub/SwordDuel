@@ -11,6 +11,9 @@ process[setting.packet.game  ] = {};
 var system = process[setting.packet.system];
 var game   = process[setting.packet.game  ];
 
+
+
+
 system[setting.system.client_auth] = function(wss, ws, msg) {
 	if (!msg) return error(ws, "message expected");
 
@@ -26,10 +29,36 @@ system[setting.system.client_auth] = function(wss, ws, msg) {
 			if (s.role == setting.system.role.player)
 				s.send(JSON.stringify({
 					packetType: setting.packet.system,
-					dataType: setting.system.server_ready
+					  dataType: setting.system.server_ready
 				}));
 		}
 }
+
+system[setting.system.client_ready] = function(wss, ws) {
+	ws.ready = true;
+
+	var nready = 0;
+	for (var i in wss.clients)
+		nready += wss.clients[i].ready;
+
+	if (nready == 2)
+		for (var i in wss.clients) {
+			var s = wss.clients[i];
+			if (s.role == setting.system.role.player) {
+				s.send(JSON.stringify({
+					packetType: setting.packet.game,
+					  dataType: setting.game.start
+				}));
+				s.send(JSON.stringify({
+					packetType: setting.packet.game,
+					  dataType: setting.game.round
+				}));
+			}
+		}
+}
+
+
+
 
 module.exports = process;
 

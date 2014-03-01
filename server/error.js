@@ -5,7 +5,7 @@ var setting = require("./setting");
 module.exports = function(ws, desc) {
 	ws.send(JSON.stringify({
 		packetType: setting.packet.system,
-		dataType: setting.system.invalid,
+		  dataType: setting.system.invalid,
 		message: {
 			description: desc
 		}
