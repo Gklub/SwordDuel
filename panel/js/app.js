@@ -31,10 +31,11 @@ Socket.onmessage = function (event) {
 	switch (packet.dataType) {
 		case settings.DATA_TYPE.GAME_START :
 		  console.log('game start');
+		  Director.toggleWaiting();
 //		 initialize full hp for 2 players
+			Player.full = packet.message.health;
 			Player.set1HP(packet.message.health);
 			Player.set2HP(packet.message.health);
-			Player.full = packet.message.health;
 
 			break;
 
@@ -48,6 +49,13 @@ Socket.onmessage = function (event) {
 			} else {
 				Player.set2HP(hp);
 			}
+
+		  setTimeout(function () {
+				Socket.send(JSON.stringify({
+					packetType: settings.PACKET_TYPE.PACKET_GAME,
+					dataType: settings.DATA_TYPE.DISPLAY_OVER
+				}));
+		  }, 2000);
 
 			break;
 
@@ -78,3 +86,7 @@ Socket.onerror = function () {
 Socket.onclose = function () {
 	console.log('socket close');
 };
+
+$(function () {
+	Director.toggleWaiting();
+});

@@ -21,7 +21,8 @@ var settings = {
 		ROUND_START: 1,
 		ATTACK: 2,
 		RESULT: 3,
-		GAME_OVER: 4
+		GAME_OVER: 4,
+		DISPLAY_OVER: 5
 	},
 
 	ROLE: {
@@ -29,5 +30,5 @@ var settings = {
 		PANEL: 1
 	},
 
-	SERVER_ADDR: 'erhandsome.org'
+	SERVER_ADDR: '192.168.42.238'//'erhandsome.org'
 };

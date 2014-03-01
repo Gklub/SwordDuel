@@ -17,9 +17,11 @@ var Player = {
 Player.set1HP = function (hp) {
 	this.player1HP = hp;
 	this.player1Bar.attr('style', 'width:' + Player.player1HP / Player.full * 100 + '%;');
+	console.log('1 hp set');
 };
 
 Player.set2HP = function (hp) {
 	this.player2HP = hp;
 	this.player2Bar.attr('style', 'width:' + Player.player2HP / Player.full * 100 + '%;');
+	console.log('2 hp set');
 };
