@@ -24,6 +24,7 @@ module.exports = {
 		attack: 2,
 		result: 3,
 		over: 4,
+		displayed: 5,
 	},
 
 

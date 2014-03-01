@@ -20,8 +20,27 @@ ws.on('open', function() {
 	}));
 });
 
+var healths;
+
 ws.on('message', function(msg) {
 	var pkt = JSON.parse(msg);
 	console.log("received:", pkt);
+
+	if (	pkt.packetType == setting.packet.game &&
+			pkt.  dataType == setting.game.start) {
+		healths = [ setting.health, setting.health ];
+		console.log("new game:");
+		console.log(">>>>>>>> ", healths, " <<<<<<<<");
+	}
+	if (	pkt.packetType == setting.packet.game &&
+			pkt.  dataType == setting.game.reault) {
+		ws.send(JSON.stringify({
+			packetType: setting.packet.game,
+			  dataType: setting.game.attack,
+			message: {
+				a: Math.random()*50,
+			},
+		}));
+	}
 });
 

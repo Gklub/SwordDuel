@@ -31,5 +31,16 @@ ws.on('message', function(msg) {
 			  dataType: setting.system.client_ready,
 		}));
 	}
+
+	if (	pkt.packetType == setting.packet.game &&
+			pkt.  dataType == setting.game.round) {
+		ws.send(JSON.stringify({
+			packetType: setting.packet.game,
+			  dataType: setting.game.attack,
+			message: {
+				a: Math.random()*50,
+			},
+		}));
+	}
 });
 
