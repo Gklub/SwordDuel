@@ -30,20 +30,30 @@ ws.on('message', function(msg) {
 			pkt.  dataType == setting.game.start) {
 		healths = [ setting.health, setting.health ];
 		console.log("new game:");
-		console.log(">>>>>>>> ", healths, " <<<<<<<<");
+		console.log(">>>>>>>> \033[1;35m", healths, "\033[0m <<<<<<<<");
 	}
+
 	if (	pkt.packetType == setting.packet.game &&
 			pkt.  dataType == setting.game.result) {
 		var player = pkt.message.player;
 		var health = pkt.message.health;
 		healths[player] = health;
 
-		console.log(">>>>>>>> ", healths, " <<<<<<<<");
+		console.log(">>>>>>>> \033[1;35m", healths, "\033[0m <<<<<<<<");
 
 		ws.send(JSON.stringify({
 			packetType: setting.packet.game,
 			  dataType: setting.game.displayed,
 		}));
+	}
+
+	if (	pkt.packetType == setting.packet.game &&
+			pkt.  dataType == setting.game.over) {
+		var player = pkt.message.player;
+		healths[player] = 0;
+
+		console.log(">>>>>>>> \033[1;35m", healths, "\033[0m <<<<<<<<");
+		console.log(">>>>>>>> \033[1;34m", "player" + (2-player) + " won!", "\033[0m <<<<<<<<");
 	}
 });
 

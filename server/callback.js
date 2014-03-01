@@ -81,13 +81,23 @@ game[setting.game.attack] = function(wss, ws, msg) {
 	if (ss.length == 2) {
 		var dh = Math.abs(ss[0].a - ss[1].a);	// delta health
 		var defeat = Number(ss[0].a > ss[1].a);
-		ss[defeat].health -= dh;
+		var die = (ss[defeat].health -= dh) <= 0;
 		ss[0].a = ss[1].a = undefined;
 
-		// notify panel: update the loser's health
+		// notify panel: update the loser's health, or game over if die
 		for (var i in wss.clients) {
 			var s = wss.clients[i];
-			if (s.role == setting.system.role.panel) {
+			if (die) {
+				s.ready = undefined;
+				s.send(JSON.stringify({
+					packetType: setting.packet.game,
+					  dataType: setting.game.over,
+					message: {
+						player: defeat,
+					}
+				}));
+			}
+			else if (s.role == setting.system.role.panel)
 				s.send(JSON.stringify({
 					packetType: setting.packet.game,
 					  dataType: setting.game.result,
@@ -96,7 +106,6 @@ game[setting.game.attack] = function(wss, ws, msg) {
 						health: ss[defeat].health,
 					}
 				}));
-			}
 		}
 	}
 }
