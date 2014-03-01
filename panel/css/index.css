@@ -1,0 +1,20 @@
+.uk-progress-bar {
+    border-radius: 10px;
+}
+
+.uk-progress {
+    height: 50px;
+    border-radius: 10px;
+}
+
+#VS {
+    text-align: center;
+}
+
+.uk-container {
+    margin-top: 200px;
+}
+
+span {
+    margin: 17px;
+}

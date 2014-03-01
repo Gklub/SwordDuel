@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>剑气决斗</title>
+	<link rel="stylesheet" href="uikit-2.3.1/css/uikit.css"/>
+	<link rel="stylesheet" href="css/index.css"/>
+</head>
+<body>
+	<div class="uk-container">
+		<div class="uk-grid">
+			<div class="uk-width-1-3">
+				<div class="uk-progress uk-progress-danger">
+					<div id="1PHP" class="uk-progress-bar" style="width: 100%;"></div>
+				</div>
+			</div>
+
+			<div id="VS" class="uk-width-1-3">
+				<h1>
+					<span id="1PName"></span>
+					<b>VS</b>
+					<span id="2PName"></span>
+				</h1>
+			</div>
+
+			<div class="uk-width-1-3">
+				<div class="uk-progress uk-progress-danger">
+					<div id="2PHP" class="uk-progress-bar" style="width: 100%;"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="uk-grid">
+			<div id="1PDamage" class="uk-width-1-2">
+			</div>
+
+			<div id="2PDamage" class="uk-width-1-2">
+			</div>
+		</div>
+	</div>
+
+	<audio src="sounds/swipe.ogg"></audio>
+	<audio src="sounds/swipe.ogg"></audio>
+	<audio src="sounds/prevent.ogg"></audio>
+
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="uikit-2.3.1/js/uikit.min.js"></script>
+	<script type="text/javascript" src="js/settings.js"></script>
+	<script type="text/javascript" src="js/audio.js"></script>
+	<script type="text/javascript" src="js/player.js"></script>
+	<script type="text/javascript" src="js/director.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+</body>
+</html>
