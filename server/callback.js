@@ -165,12 +165,11 @@ game[setting.game.displayed] = function(wss, ws) {
 	// notify clients: new round
 	for (var i in wss.clients) {
 		var s = wss.clients[i];
-		if (s.role == setting.system.role.player) {
+		if (s.role == setting.system.role.player)
 			s.send(JSON.stringify({
 				packetType: setting.packet.game,
 				  dataType: setting.game.round,
 			}));
-		}
 	}
 }
 
