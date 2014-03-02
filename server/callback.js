@@ -10,6 +10,7 @@ callback[setting.packet.game  ] = {};
 
 var system = callback[setting.packet.system];
 var game   = callback[setting.packet.game  ];
+var game_started;
 
 
 
@@ -52,8 +53,7 @@ system[setting.system.client_ready] = function(wss, ws) {
 	var names = [];
 	for (var i in wss.clients) {
 		var s = wss.clients[i];
-		if (s.role == setting.system.role.player)
-			names.push(s.name);
+		if (s.ready) names.push(s.name);
 	}
 
 	// notify panel : game start
