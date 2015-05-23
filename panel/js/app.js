@@ -67,7 +67,7 @@ Socket.onmessage = function (event) {
 				Player.set2HP(hp);
 			}
 
-		  Director.shake(isPlayer1);
+//		  Director.shake(isPlayer1);
 
 		  setTimeout(function () {
 				Socket.send(JSON.stringify({

@@ -30,5 +30,5 @@ var settings = {
 		PANEL: 1
 	},
 
-	SERVER_ADDR: '192.168.43.85'//'erhandsome.org'
+	SERVER_ADDR: '192.168.100.171'//'erhandsome.org'
 };

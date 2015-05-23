@@ -9,7 +9,7 @@ window.addEventListener('load', function () {
 	FastClick.attach(document.body);
 }, false);
 
-document.addEventListener('deviceready', function () {
+document.addEventListener('DOMContentLoaded', function () {
 	$('#server_addr').val(settings.SERVER_ADDR);
 	$('#name').val(localStorage.getItem('name'));
 
